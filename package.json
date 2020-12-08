@@ -1,0 +1,37 @@
+{
+  "name": "rpi-garage-remote-homekit",
+  "version": "0.0.1",
+  "description": "Control garage door remote (or any other remote) from HomeKit using Raspberry Pi GPIO pins connected to remote controller's buttons.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stichoza/rpi-garage-remote-homekit.git"
+  },
+  "keywords": [
+    "rpi",
+    "raspberry",
+    "gpio",
+    "homekit",
+    "apple",
+    "gate",
+    "garage",
+    "door",
+    "garage",
+    "door",
+    "opener",
+    "wifi",
+    "smart",
+    "home"
+  ],
+  "author": "Stichoza <me@stichoza.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stichoza/rpi-garage-remote-homekit/issues"
+  },
+  "homepage": "https://github.com/Stichoza/rpi-garage-remote-homekit#readme",
+  "dependencies": {
+  }
+}
