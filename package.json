@@ -33,5 +33,6 @@
   },
   "homepage": "https://github.com/Stichoza/rpi-garage-remote-homekit#readme",
   "dependencies": {
+    "hap-nodejs": "^0.8.3"
   }
 }
