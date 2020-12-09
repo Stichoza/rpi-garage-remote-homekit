@@ -27,6 +27,12 @@ const simulateOpenerAction = async (from, to) => {
 const open = async () => {
     await door.open();
     await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
+
+    if (config.autoclose) {
+        setTimeout(() => {
+            openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
+        }, config.autoclose * 1000);
+    }
 }
 
 const close = async () => {
