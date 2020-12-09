@@ -2,7 +2,7 @@ const hap = require('hap-nodejs');
 const rpi = require('./rpi');
 const door = require('./door');
 const config = require('./config.json');
-const packageJson = require('./package.json');
+const pjson = require('./package.json');
 
 const { Accessory, AccessoryEventTypes, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
 
@@ -55,10 +55,10 @@ currentState.on(CharacteristicEventTypes.GET, async callback => {
 });
 
 accessory.getService(Service.AccessoryInformation)
-    .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
+    .setCharacteristic(Characteristic.Manufacturer, pjson.author.substr(0, pjson.author.indexOf(' ')))
     .setCharacteristic(Characteristic.Model, rpi.model())
     .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
-    .setCharacteristic(Characteristic.FirmwareRevision, packageJson.version);
+    .setCharacteristic(Characteristic.FirmwareRevision, pjson.version);
 
 accessory.addService(openerService);
 
