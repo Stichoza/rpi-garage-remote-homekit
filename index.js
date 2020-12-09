@@ -24,6 +24,16 @@ const simulateOpenerAction = async (from, to) => {
     }, config.actionTime * 1000);
 };
 
+const open = async () => {
+    await door.open();
+    await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
+}
+
+const close = async () => {
+    await door.close();
+    await simulateOpenerAction(Characteristic.CurrentDoorState.CLOSING, Characteristic.CurrentDoorState.CLOSED);
+};
+
 accessory
     .getService(Service.AccessoryInformation)
     .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
@@ -38,11 +48,9 @@ openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.T
 
 targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
     if (value === Characteristic.TargetDoorState.OPEN) {
-        await door.open();
-        await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
+        await open();
     } else if (value === Characteristic.TargetDoorState.CLOSED) {
-        await door.close();
-        await simulateOpenerAction(Characteristic.CurrentDoorState.CLOSING, Characteristic.CurrentDoorState.CLOSED);
+        await close();
     }
     callback();
 });
