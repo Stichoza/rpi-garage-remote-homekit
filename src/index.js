@@ -1,6 +1,6 @@
 const hap = require('hap-nodejs');
 const rpi = require('./rpi');
-const door = require('./door');
+const controller = require('./controller');
 const config = require('../config.json');
 const packageJson = require('../package.json');
 
@@ -25,7 +25,7 @@ const simulateOpenerAction = async (from, to) => {
 };
 
 const open = async () => {
-    await door.open();
+    await controller.open();
     await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
 
     if (config.autoclose) {
@@ -36,12 +36,12 @@ const open = async () => {
 }
 
 const close = async () => {
-    await door.close();
+    await controller.close();
     await simulateOpenerAction(Characteristic.CurrentDoorState.CLOSING, Characteristic.CurrentDoorState.CLOSED);
 };
 
 accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
-    door.identify().then(callback));
+    controller.identify().then(callback));
 
 openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 
@@ -56,7 +56,7 @@ targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
 });
 
 currentState.on(CharacteristicEventTypes.GET, async callback => {
-    await door.status();
+    await controller.status();
     callback(null, currentAction);
 });
 
