@@ -8,6 +8,8 @@ const { Accessory, AccessoryEventTypes, Categories, Characteristic, Characterist
 const uuid = hap.uuid.generate("rpi-garage-remote-homekit-" + config.pin);
 const accessory = new Accessory("Garage Door", uuid);
 const openerService = new Service.GarageDoorOpener("Garage Door Opener");
+const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
+const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
 accessory
     .getService(Service.AccessoryInformation)
@@ -23,8 +25,6 @@ accessory.on('identify', (paired, callback) => {
 });
 
 
-const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
-const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
 targetState.on(CharacteristicEventTypes.SET, (value, callback) => {
     if (value === Characteristic.TargetDoorState.OPEN) {
