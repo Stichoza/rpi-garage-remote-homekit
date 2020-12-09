@@ -11,6 +11,7 @@ const openerService = new Service.GarageDoorOpener("Garage Door Opener");
 const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
 const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
+let currentAction = Characteristic.CurrentDoorState.CLOSED;
 accessory
     .getService(Service.AccessoryInformation)
     .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
@@ -32,9 +33,9 @@ targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
     callback();
 });
 
-    console.log('Checking');
-    callback(null, Characteristic.CurrentDoorState.CLOSED);
 currentState.on(CharacteristicEventTypes.GET, async callback => {
+    await door.status();
+    callback(null, currentAction);
 });
 
 accessory.addService(openerService);
