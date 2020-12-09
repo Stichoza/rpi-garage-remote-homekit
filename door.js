@@ -1,4 +1,11 @@
 const onoff = require('onoff');
+const config = require('./config.json');
+
+const gpio = {
+    open: new onoff.Gpio(config.gpio.open, 'out'),
+    close: new onoff.Gpio(config.gpio.close, 'out'),
+    status: new onoff.Gpio(config.gpio.status, 'out')
+};
 
 const press = async () => {
 

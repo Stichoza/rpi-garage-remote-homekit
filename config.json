@@ -3,5 +3,10 @@
   "pin": "407-76-034",
   "port": 47129,
   "autoclose": 15,
-  "actionTime": 5
+  "actionTime": 5,
+  "gpio": {
+    "open": 27,
+    "close": 17,
+    "status": 22
+  }
 }
