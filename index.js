@@ -38,9 +38,11 @@ openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.T
 
 targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
     if (value === Characteristic.TargetDoorState.OPEN) {
-        console.log('Opening');
+        await door.open();
+        await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
     } else if (value === Characteristic.TargetDoorState.CLOSED) {
-        console.log('Closing');
+        await door.close();
+        await simulateOpenerAction(Characteristic.CurrentDoorState.CLOSING, Characteristic.CurrentDoorState.CLOSED);
     }
     callback();
 });
