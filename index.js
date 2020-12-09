@@ -11,7 +11,19 @@ const openerService = new Service.GarageDoorOpener("Garage Door Opener");
 const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
 const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
+let actionTimeout = null;
 let currentAction = Characteristic.CurrentDoorState.CLOSED;
+
+const simulateOpenerAction = async (from, to) => {
+    clearTimeout(actionTimeout);
+    currentAction = from;
+    openerService.setCharacteristic(Characteristic.CurrentDoorState, from);
+    actionTimeout = setTimeout(() => {
+        currentAction = to;
+        openerService.setCharacteristic(Characteristic.CurrentDoorState, to);
+    }, config.actionTime * 1000);
+};
+
 accessory
     .getService(Service.AccessoryInformation)
     .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
