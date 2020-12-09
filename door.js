@@ -4,7 +4,7 @@ const press = async () => {
 
 };
 
-const open = async (autoclose = 0) => {
+const open = async () => {
     console.log('Green blink');
 };
 
