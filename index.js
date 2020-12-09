@@ -33,13 +33,6 @@ const close = async () => {
     await simulateOpenerAction(Characteristic.CurrentDoorState.CLOSING, Characteristic.CurrentDoorState.CLOSED);
 };
 
-accessory
-    .getService(Service.AccessoryInformation)
-    .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
-    .setCharacteristic(Characteristic.Model, rpi.model())
-    .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
-    .setCharacteristic(Characteristic.FirmwareRevision, config.firmware);
-
 accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
     door.identify().then(callback));
 
@@ -59,6 +52,12 @@ currentState.on(CharacteristicEventTypes.GET, async callback => {
     await door.status();
     callback(null, currentAction);
 });
+
+accessory.getService(Service.AccessoryInformation)
+    .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
+    .setCharacteristic(Characteristic.Model, rpi.model())
+    .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
+    .setCharacteristic(Characteristic.FirmwareRevision, config.firmware);
 
 accessory.addService(openerService);
 
