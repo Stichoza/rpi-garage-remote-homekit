@@ -3,7 +3,7 @@ const rpi = require('./rpi');
 const door = require('./door');
 const config = require('./config.json');
 
-const { Accessory, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
+const { Accessory, AccessoryEventTypes, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
 
 const accessoryUuid = hap.uuid.generate("rpi-garage-remote-homekit");
 const accessory = new Accessory("RPi Garage Door", accessoryUuid);
