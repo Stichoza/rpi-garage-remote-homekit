@@ -7,8 +7,9 @@ const gpio = {
     status: new onoff.Gpio(config.gpio.status, 'out')
 };
 
-const press = async () => {
-
+const press = async (pin, length = 500) => {
+    pin.write(onoff.Gpio.HIGH);
+    setTimeout(pin.write(onoff.Gpio.LOW), length);
 };
 
 const open = async () => {
