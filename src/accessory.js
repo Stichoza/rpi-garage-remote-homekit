@@ -1,6 +1,6 @@
 const hap = require('hap-nodejs');
-const hardware = require('./hardware');
-const controller = require('./controller');
+const hardware = require('hardware');
+const controller = require('controller');
 const config = require('../config.json');
 const packageJson = require('../package.json');
 
