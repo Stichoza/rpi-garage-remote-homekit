@@ -1,7 +1,9 @@
 const hap = require('hap-nodejs');
 const rpi = require('./rpi');
+const door = require('./door');
+const config = require('./config.json');
 
-const {Accessory, Categories, Characteristic, CharacteristicEventTypes, Service} = hap;
+const { Accessory, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
 
 const accessoryUuid = hap.uuid.generate("rpi-garage-remote-homekit");
 const accessory = new Accessory("RPi Garage Door", accessoryUuid);
@@ -10,7 +12,8 @@ accessory
     .getService(Service.AccessoryInformation)
     .setCharacteristic(Characteristic.Manufacturer, 'Raspberry Pi')
     .setCharacteristic(Characteristic.Model, rpi.model())
-    .setCharacteristic(Characteristic.SerialNumber, rpi.serial());
+    .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
+    .setCharacteristic(Characteristic.FirmwareRevision, config.firmware);
 
 accessory.on('identify', (paired, callback) => {
     console.log('Identifying');
@@ -40,8 +43,8 @@ currentState.on(CharacteristicEventTypes.GET, callback => {
 accessory.addService(openerService);
 
 accessory.publish({
-    username: "17:51:07:F4:BC:80",
-    pincode: "678-90-000",
-    port: 47129,
+    username: config.mac,
+    pincode: config.pin,
+    port: config.port,
     category: Categories.GARAGE_DOOR_OPENER,
 });
