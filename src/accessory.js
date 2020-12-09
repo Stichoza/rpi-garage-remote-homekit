@@ -6,9 +6,9 @@ const packageJson = require('../package.json');
 
 const { Accessory, AccessoryEventTypes, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
 
-const uuid = hap.uuid.generate("rpi-garage-remote-homekit-" + config.pin);
+const uuid = hap.uuid.generate('rpi-garage-remote-homekit-' + config.pin);
 const accessory = new Accessory(config.name, uuid);
-const openerService = new Service.GarageDoorOpener("Garage Door Opener");
+const openerService = new Service.GarageDoorOpener('Garage Door Opener');
 const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
 const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
