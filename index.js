@@ -29,7 +29,7 @@ const open = async () => {
     await simulateOpenerAction(Characteristic.CurrentDoorState.OPENING, Characteristic.CurrentDoorState.OPEN);
 
     if (config.autoclose) {
-        setTimeout(() => {
+        autocloseTimeout = setTimeout(() => {
             openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
         }, config.autoclose * 1000);
     }
