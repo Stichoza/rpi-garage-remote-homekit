@@ -11,6 +11,7 @@ const openerService = new Service.GarageDoorOpener("Garage Door Opener");
 const currentState = openerService.getCharacteristic(Characteristic.CurrentDoorState);
 const targetState = openerService.getCharacteristic(Characteristic.TargetDoorState);
 
+let autocloseTimeout = null;
 let actionTimeout = null;
 let currentAction = Characteristic.CurrentDoorState.CLOSED;
 
@@ -47,6 +48,7 @@ accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
 openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 
 targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
+    clearTimeout(autocloseTimeout);
     if (value === Characteristic.TargetDoorState.OPEN) {
         await open();
     } else if (value === Characteristic.TargetDoorState.CLOSED) {
