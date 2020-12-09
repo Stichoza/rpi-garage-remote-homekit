@@ -1,8 +1,8 @@
 const hap = require('hap-nodejs');
 const rpi = require('./rpi');
 const door = require('./door');
-const config = require('./config.json');
-const packageJson = require('./package.json');
+const config = require('../config.json');
+const packageJson = require('../package.json');
 
 const { Accessory, AccessoryEventTypes, Categories, Characteristic, CharacteristicEventTypes, Service } = hap;
 

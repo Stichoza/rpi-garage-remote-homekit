@@ -1,5 +1,5 @@
 const onoff = require('onoff');
-const config = require('./config.json');
+const config = require('../config.json');
 
 const gpio = {
     open: new onoff.Gpio(config.gpio.open, 'out'),
