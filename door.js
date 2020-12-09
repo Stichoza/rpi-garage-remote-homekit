@@ -1,7 +1,4 @@
-const hap = require('hap-nodejs');
 const onoff = require('onoff');
-
-const { CurrentDoorState, TargetDoorState } = hap.Characteristic;
 
 const press = async () => {
 
