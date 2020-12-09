@@ -21,6 +21,7 @@ accessory
 accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
     door.identify().then(callback));
 
+openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 
 targetState.on(CharacteristicEventTypes.SET, (value, callback) => {
     if (value === Characteristic.TargetDoorState.OPEN) {
