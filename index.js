@@ -23,7 +23,7 @@ accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
 
 openerService.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 
-targetState.on(CharacteristicEventTypes.SET, (value, callback) => {
+targetState.on(CharacteristicEventTypes.SET, async (value, callback) => {
     if (value === Characteristic.TargetDoorState.OPEN) {
         console.log('Opening');
     } else if (value === Characteristic.TargetDoorState.CLOSED) {
@@ -32,9 +32,9 @@ targetState.on(CharacteristicEventTypes.SET, (value, callback) => {
     callback();
 });
 
-currentState.on(CharacteristicEventTypes.GET, callback => {
     console.log('Checking');
     callback(null, Characteristic.CurrentDoorState.CLOSED);
+currentState.on(CharacteristicEventTypes.GET, async callback => {
 });
 
 accessory.addService(openerService);
