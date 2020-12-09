@@ -12,20 +12,15 @@ const press = async (pin, length = 500) => {
     setTimeout(() => pin.writeSync(onoff.Gpio.LOW), length);
 };
 
-const open = async () => {
-    console.log('Green blink');
-};
+const triplePress = async (pin, length = 500) => {
+    setTimeout(() => press(gpio.status, length), 1);
+    setTimeout(() => press(gpio.status, length), length * 2);
+    setTimeout(() => press(gpio.status, length), length * 4);
+}
 
-const close = async () => {
-    console.log('Red blink');
-};
-
-const status = async () => {
-    console.log('Blue blink');
-};
-
-const identify = async () => {
-    console.log('Blue blink-blink-blink');
-};
+const open = async () => await triplePress(gpio.open);
+const close = async () => await press(gpio.close);
+const status = async () => await press(gpio.status, 200);
+const identify = async () => await triplePress(gpio.status, 100);
 
 module.exports = { open, close, status, identify };
