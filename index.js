@@ -17,11 +17,9 @@ let currentAction = Characteristic.CurrentDoorState.CLOSED;
 
 const simulateOpenerAction = async (from, to) => {
     clearTimeout(actionTimeout);
-    currentAction = from;
-    openerService.setCharacteristic(Characteristic.CurrentDoorState, from);
+    openerService.setCharacteristic(Characteristic.CurrentDoorState, currentAction = from);
     actionTimeout = setTimeout(() => {
-        currentAction = to;
-        openerService.setCharacteristic(Characteristic.CurrentDoorState, to);
+        openerService.setCharacteristic(Characteristic.CurrentDoorState, currentAction = to);
     }, config.actionTime * 1000);
 };
 
