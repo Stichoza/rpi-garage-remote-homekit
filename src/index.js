@@ -1,5 +1,5 @@
 const hap = require('hap-nodejs');
-const rpi = require('./rpi');
+const hardware = require('./hardware');
 const controller = require('./controller');
 const config = require('../config.json');
 const packageJson = require('../package.json');
@@ -61,9 +61,9 @@ currentState.on(CharacteristicEventTypes.GET, async callback => {
 });
 
 accessory.getService(Service.AccessoryInformation)
-    .setCharacteristic(Characteristic.Manufacturer, rpi.manufacturer())
-    .setCharacteristic(Characteristic.Model, rpi.model())
-    .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
+    .setCharacteristic(Characteristic.Manufacturer, hardware.manufacturer())
+    .setCharacteristic(Characteristic.Model, hardware.model())
+    .setCharacteristic(Characteristic.SerialNumber, hardware.serial())
     .setCharacteristic(Characteristic.FirmwareRevision, packageJson.version);
 
 accessory.addService(openerService);
