@@ -18,12 +18,8 @@ accessory
     .setCharacteristic(Characteristic.SerialNumber, rpi.serial())
     .setCharacteristic(Characteristic.FirmwareRevision, config.firmware);
 
-accessory.on('identify', (paired, callback) => {
-    console.log('Identifying');
-
-    callback();
-});
-
+accessory.on(AccessoryEventTypes.IDENTIFY, async (paired, callback) =>
+    door.identify().then(callback));
 
 
 targetState.on(CharacteristicEventTypes.SET, (value, callback) => {
