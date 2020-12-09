@@ -16,10 +16,7 @@ const readFile = (file, caps = false, fallback = 'Unknown') => {
 }
 
 module.exports = {
-    serial: () => {
-        return readFile(serialFile);
-    },
-    model: () => {
-        return readFile(modelFile, true);
-    }
+    manufacturer: () => 'Raspberry Pi',
+    model: () => readFile(modelFile),
+    serial: () => readFile(serialFile, true)
 };
