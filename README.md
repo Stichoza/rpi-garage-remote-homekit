@@ -1,4 +1,4 @@
-# Raspberry Pi Garage Door Remote for HomeKit using GPIO
+# Raspberry Pi Garage Door Remote for HomeKit
 
 Control garage door remote (or any other remote) from HomeKit using Raspberry Pi GPIO pins connected to remote controller's buttons.
 
