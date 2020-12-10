@@ -13,9 +13,9 @@ const press = async (pin, length = 500) => {
 };
 
 const triplePress = async (pin, length = 500) => {
-    setTimeout(() => press(gpio.status, length), 1);
-    setTimeout(() => press(gpio.status, length), length * 2);
-    setTimeout(() => press(gpio.status, length), length * 4);
+    setTimeout(() => press(pin, length), 1);
+    setTimeout(() => press(pin, length), length * 2);
+    setTimeout(() => press(pin, length), length * 4);
 }
 
 const open = async () => await triplePress(gpio.open);
