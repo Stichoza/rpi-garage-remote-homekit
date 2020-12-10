@@ -7,7 +7,7 @@ const readFile = (file, caps = false, fallback = 'Unknown') => {
     let content = fallback;
 
     try {
-        content = fs.readFileSync(file);
+        content = fs.readFileSync(file).toString();
     } catch (e) {
         return fallback;
     }
@@ -17,6 +17,6 @@ const readFile = (file, caps = false, fallback = 'Unknown') => {
 
 module.exports = {
     manufacturer: () => 'Raspberry Pi',
-    model: () => readFile(modelFile),
+    model: () => readFile(modelFile).replace('Raspberry Pi').trim(),
     serial: () => readFile(serialFile, true)
 };
