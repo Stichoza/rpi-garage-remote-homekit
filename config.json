@@ -3,7 +3,7 @@
   "mac": "EE:84:F2:89:09:9C",
   "pin": "407-76-034",
   "port": 47129,
-  "autoclose": 15,
+  "autoclose": 60,
   "actionTime": 5,
   "gpio": {
     "open": 27,
