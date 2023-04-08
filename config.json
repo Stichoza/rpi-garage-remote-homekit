@@ -6,7 +6,7 @@
   "autoclose": 60,
   "actionTime": 5,
   "gpio": {
-    "open": 27,
+    "open": 17,
     "close": 17,
     "status": 22
   }
